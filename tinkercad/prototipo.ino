@@ -9,10 +9,18 @@ const int ledVermelho = 10;
 const int ledAzul = 11;
 
 const float limitePotencia = 10.0;
+const float tarifa = 1.20;
 
 bool sessaoAtiva = false;
 
+unsigned long inicioSessao = 0;
+unsigned long ultimoCalculo = 0;
+
+float energiaTotal = 0;
+float custoTotal = 0;
+
 void setup() {
+
   pinMode(botao, INPUT_PULLUP);
 
   pinMode(ledVerde, OUTPUT);
@@ -35,9 +43,28 @@ void loop() {
     delay(300);
 
     if (sessaoAtiva) {
-      Serial.println("Sessao iniciada.");
+
+      inicioSessao = millis();
+      ultimoCalculo = millis();
+
+      energiaTotal = 0;
+      custoTotal = 0;
+
+      Serial.println();
+      Serial.println("SESSAO INICIADA.");
+
     } else {
-      Serial.println("Sessao encerrada.");
+
+      Serial.println();
+      Serial.println("SESSAO ENCERRADA.");
+
+      Serial.print("Energia total: ");
+      Serial.print(energiaTotal, 2);
+      Serial.println(" kWh");
+
+      Serial.print("Custo total: R$ ");
+      Serial.println(custoTotal, 2);
+
       desligarLeds();
     }
   }
@@ -68,6 +95,16 @@ void loop() {
 
     float potenciaRede = potenciaLiberada - potenciaSolarUtilizada;
 
+    unsigned long agora = millis();
+
+    float tempoHoras = (agora - ultimoCalculo) / 3600000.0;
+
+    energiaTotal = energiaTotal + (potenciaLiberada * tempoHoras);
+
+    custoTotal = energiaTotal * tarifa;
+
+    ultimoCalculo = agora;
+
     Serial.println("-----------------------------");
 
     Serial.print("Potencia solar: ");
@@ -82,13 +119,16 @@ void loop() {
     Serial.print(potenciaLiberada, 1);
     Serial.println(" kW");
 
-    Serial.print("Solar utilizada: ");
-    Serial.print(potenciaSolarUtilizada, 1);
-    Serial.println(" kW");
-
-    Serial.print("Rede utilizada: ");
+    Serial.print("Potencia da rede: ");
     Serial.print(potenciaRede, 1);
     Serial.println(" kW");
+
+    Serial.print("Energia acumulada: ");
+    Serial.print(energiaTotal, 2);
+    Serial.println(" kWh");
+
+    Serial.print("Custo acumulado: R$ ");
+    Serial.println(custoTotal, 2);
 
     if (demanda > limitePotencia) {
 
@@ -98,7 +138,7 @@ void loop() {
       digitalWrite(ledAzul, LOW);
 
       Serial.println("STATUS: SOBRECARGA");
-      Serial.println("ACAO: Potencia limitada.");
+      Serial.println("ACAO: POTENCIA LIMITADA.");
 
     } else if (potenciaSolar >= demanda && demanda > 0) {
 
