@@ -22,26 +22,22 @@ void setup() {
 
   Serial.begin(9600);
 
-  Serial.println("================================");
-  Serial.println("           GURGEL");
-  Serial.println("   CHARGEGRID INTELLIGENCE");
-  Serial.println("================================");
+  Serial.println("GURGEL - CHARGEGRID INTELLIGENCE");
   Serial.println("Pressione o botao para iniciar.");
 }
 
 void loop() {
 
   if (digitalRead(botao) == LOW) {
+
     sessaoAtiva = !sessaoAtiva;
 
     delay(300);
 
     if (sessaoAtiva) {
-      Serial.println();
-      Serial.println("Sessao de carregamento iniciada.");
+      Serial.println("Sessao iniciada.");
     } else {
-      Serial.println();
-      Serial.println("Sessao de carregamento encerrada.");
+      Serial.println("Sessao encerrada.");
       desligarLeds();
     }
   }
@@ -51,7 +47,7 @@ void loop() {
     int valorSolar = analogRead(sensorSolar);
     int valorDemanda = analogRead(sensorDemanda);
 
-    float energiaSolar = valorSolar * 12.0 / 1023.0;
+    float potenciaSolar = valorSolar * 12.0 / 1023.0;
     float demanda = valorDemanda * 15.0 / 1023.0;
 
     float potenciaLiberada;
@@ -62,24 +58,23 @@ void loop() {
       potenciaLiberada = demanda;
     }
 
-    float energiaSolarUtilizada;
+    float potenciaSolarUtilizada;
 
-    if (energiaSolar >= potenciaLiberada) {
-      energiaSolarUtilizada = potenciaLiberada;
+    if (potenciaSolar >= potenciaLiberada) {
+      potenciaSolarUtilizada = potenciaLiberada;
     } else {
-      energiaSolarUtilizada = energiaSolar;
+      potenciaSolarUtilizada = potenciaSolar;
     }
 
-    float energiaRede = potenciaLiberada - energiaSolarUtilizada;
+    float potenciaRede = potenciaLiberada - potenciaSolarUtilizada;
 
-    Serial.println();
-    Serial.println("--------------------------------");
+    Serial.println("-----------------------------");
 
-    Serial.print("Energia solar: ");
-    Serial.print(energiaSolar, 1);
+    Serial.print("Potencia solar: ");
+    Serial.print(potenciaSolar, 1);
     Serial.println(" kW");
 
-    Serial.print("Demanda solicitada: ");
+    Serial.print("Demanda: ");
     Serial.print(demanda, 1);
     Serial.println(" kW");
 
@@ -87,12 +82,12 @@ void loop() {
     Serial.print(potenciaLiberada, 1);
     Serial.println(" kW");
 
-    Serial.print("Energia solar utilizada: ");
-    Serial.print(energiaSolarUtilizada, 1);
+    Serial.print("Solar utilizada: ");
+    Serial.print(potenciaSolarUtilizada, 1);
     Serial.println(" kW");
 
-    Serial.print("Energia da rede: ");
-    Serial.print(energiaRede, 1);
+    Serial.print("Rede utilizada: ");
+    Serial.print(potenciaRede, 1);
     Serial.println(" kW");
 
     if (demanda > limitePotencia) {
@@ -103,16 +98,16 @@ void loop() {
       digitalWrite(ledAzul, LOW);
 
       Serial.println("STATUS: SOBRECARGA");
-      Serial.println("ACAO: Redistribuicao de potencia");
+      Serial.println("ACAO: Potencia limitada.");
 
-    } else if (energiaSolar >= demanda && demanda > 0) {
+    } else if (potenciaSolar >= demanda && demanda > 0) {
 
       digitalWrite(ledAzul, HIGH);
       digitalWrite(ledVerde, LOW);
       digitalWrite(ledAmarelo, LOW);
       digitalWrite(ledVermelho, LOW);
 
-      Serial.println("STATUS: ENERGIA SOLAR PRIORIZADA");
+      Serial.println("STATUS: ENERGIA SOLAR PRIORIZADA.");
 
     } else if (demanda >= 8.0) {
 
@@ -121,7 +116,7 @@ void loop() {
       digitalWrite(ledVermelho, LOW);
       digitalWrite(ledAzul, LOW);
 
-      Serial.println("STATUS: POTENCIA REDUZIDA");
+      Serial.println("STATUS: POTENCIA REDUZIDA.");
 
     } else {
 
@@ -130,7 +125,7 @@ void loop() {
       digitalWrite(ledVermelho, LOW);
       digitalWrite(ledAzul, LOW);
 
-      Serial.println("STATUS: CARREGAMENTO NORMAL");
+      Serial.println("STATUS: CARREGAMENTO NORMAL.");
     }
 
     delay(1000);
@@ -138,6 +133,7 @@ void loop() {
 }
 
 void desligarLeds() {
+
   digitalWrite(ledVerde, LOW);
   digitalWrite(ledAmarelo, LOW);
   digitalWrite(ledVermelho, LOW);
