@@ -206,16 +206,15 @@ sprint_03_gurgel/
 ├── python/
 │   ├── dashboard.py
 │   ├── gerenciamento.py
-│   ├── dados.csv
-│   └── requirements.txt
+│   └── dados.csv
 │
 ├── tinkercad/
 │   ├── teste_potenciometros.ino
 │   └── prototipo_gurgel.ino
 │
 ├── docs/
-│
 │   └── diagrama.png
+│   
 │
 └── imagens/
     └── telas/
