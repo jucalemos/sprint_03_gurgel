@@ -18,11 +18,9 @@ total_sessoes = len(dados)
 
 print("================================")
 print("           GURGEL")
-print("   CHARGEGRID INTELLIGENCE")
 print("================================")
 
 print()
-
 print("Total de sessoes:", total_sessoes)
 print("Energia total:", round(energia_total, 2), "kWh")
 print("Energia solar:", round(solar_total, 2), "kWh")
@@ -44,6 +42,8 @@ print(dados[[
 
 sns.set_theme()
 
+# Grafico 1 - Energia por sessao
+
 plt.figure(figsize=(8, 5))
 
 sns.barplot(
@@ -56,8 +56,11 @@ plt.title("Energia consumida por sessao")
 plt.xlabel("Sessao")
 plt.ylabel("Energia (kWh)")
 
+plt.tight_layout()
 plt.show()
 
+
+# Grafico 2 - Custo por sessao
 
 plt.figure(figsize=(8, 5))
 
@@ -71,11 +74,44 @@ plt.title("Custo por sessao")
 plt.xlabel("Sessao")
 plt.ylabel("Custo (R$)")
 
+plt.tight_layout()
 plt.show()
 
 
-energia = [solar_total, rede_total]
-nomes = ["Energia Solar", "Energia da Rede"]
+# Grafico 3 - Potencia
+
+plt.figure(figsize=(8, 5))
+
+plt.plot(
+    dados["Sessao"],
+    dados["Potencia_kW"],
+    marker="o"
+)
+
+plt.axhline(
+    10,
+    linestyle="--"
+)
+
+plt.title("Potencia utilizada por sessao")
+plt.xlabel("Sessao")
+plt.ylabel("Potencia (kW)")
+
+plt.tight_layout()
+plt.show()
+
+
+# Grafico 4 - Solar x Rede
+
+energia = [
+    solar_total,
+    rede_total
+]
+
+nomes = [
+    "Energia Solar",
+    "Energia da Rede"
+]
 
 plt.figure(figsize=(6, 6))
 
@@ -87,4 +123,5 @@ plt.pie(
 
 plt.title("Distribuicao da energia utilizada")
 
+plt.tight_layout()
 plt.show()
