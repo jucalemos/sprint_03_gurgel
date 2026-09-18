@@ -190,8 +190,8 @@ sprint_03_gurgel/
 │   └── prototipo_gurgel.ino
 │
 ├── docs/
-│   ├── diagrama_integracao.png
-│   └── dashboard.png
+│
+│   └── diagrama.png
 │
 └── imagens/
     └── telas/
