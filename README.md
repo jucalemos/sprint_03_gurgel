@@ -4,7 +4,6 @@
 
 ## Integrantes 
 
-Integrantes: 
 Integrante 1: Júlia Lemos Souza - RM 569089
 Integrante 2: Erick Yu Xiang Li - RM 569305
 Integrante 3: Erick Banhos de Castro - RM 572131
