@@ -1,5 +1,29 @@
 # Gurgel — Sprint 3
 
+---
+
+## Integrantes 
+
+Integrantes: 
+Integrante 1: Júlia Lemos Souza - RM 569089
+Integrante 2: Erick Yu Xiang Li - RM 569305
+Integrante 3: Erick Banhos de Castro - RM 572131
+Integrante 4: Victor Henrique Nogueira Bezerra Azevedo de Souza - RM 570021
+Integrante 5: Carlos Henrique - RM 573334
+Integrante 6: Gustavo Araújo Ramos da Silva - RM 574156
+
+---
+
+## Links
+
+Link do vídeo: 
+
+Link do repositório: https://github.com/jucalemos/sprint_03_gurgel.git
+
+Link do tinkercad: https://www.tinkercad.com/things/0CDrtTmcU6C-exquisite-leelo/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard&sharecode=hHLkf4Ldi_WD7URje4m3UneIAnep3eaA5U-deHbbyfs
+
+---
+
 ## Prototipagem Funcional e Integração
 
 O Gurgel é uma solução para gerenciamento inteligente de carregamento de veículos elétricos.
