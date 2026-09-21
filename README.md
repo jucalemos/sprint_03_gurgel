@@ -15,7 +15,7 @@ Integrante 6: Gustavo Araújo Ramos da Silva - RM 574156
 
 ## Links
 
-Link do vídeo: 
+Link do vídeo: https://youtu.be/lSTSnpokuLU
 
 Link do repositório: https://github.com/jucalemos/sprint_03_gurgel.git
 
